@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { NativeBaseProvider, VStack, HStack, Heading, Box, Text, Button, Input, Link } from "native-base";
+import { TouchableOpacity } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 
-export default function SignupScreen() {
+export default function SignupScreen({navigation}:any) {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
@@ -10,6 +12,7 @@ export default function SignupScreen() {
     const [password, setPassword] = useState("");
     
     const [errorList, setErrorList]= useState([]);
+
     const isValidFirstName:boolean =/../.test(firstName);  // minimum 2 chars
     const isValidLastName:boolean = /../.test(lastName);  // minimum 2 chars
     const isValidEmail:boolean = /.....@gmail.com/.test(email); // only gmail accepted for android
@@ -56,26 +59,58 @@ export default function SignupScreen() {
         setPassword(e)
     }
 
+    // Check if the user fills all the required fields,
+    // Otherwise suggest for providing necessary information
+    function inputDataCheckPoint():any{
+        let invalidData:any = [];
+        !isValidFirstName && invalidData.push("Require first name.");
+        !isValidLastName && invalidData.push("Require last name.");
+        !isValidEmail && invalidData.push("Require valid email address.");
+        !isValidMobileNumber && invalidData.push("Require valid mobile number");
+        !isValidPassword() && invalidData.push("Use mixed password 8 digit or longer.");
+        setErrorList(invalidData);
+    }
+    // Show list of invaid input data if any
+  function showInvalidDataList() {
+    return (errorList.map((e, i) => {
+      return (<Text key={i} style={{ color: "red" }}>{i + 1}. {e}.{"\n"}</Text>)
+    }))
+  }
+
+
     function onPressSignup(e: any) {
+        inputDataCheckPoint();
+        console.log(errorList)
         return (alert("complete the data submit action"))
     }
     return (
         <NativeBaseProvider>
+            
             <VStack p={5} space={3}>
                 <Box>
                     <Heading size="md" color={'blue.500'}>Sign up with real information</Heading>
                     * Later can not be changed *
                 </Box>
-
+                <Box>
+                    {showInvalidDataList()}
+                </Box>
                 <Box>
                     <Input placeholder={"First Name"} value={firstName} size="lg" onChangeText={onChangeFirstName} />
                     <Input placeholder={"Last Name"} value={lastName} size="lg" onChangeText={onChangeLastName} />
                     <Input placeholder={"Email Address"} value={email} size="lg" onChangeText={onChangeEmail} />
                     <Input placeholder={"Mobile Number"} value={mobileNumber} size="lg" onChangeText={onChangeMobileNumber} />
-                    <Input placeholder={"Password"} value={password} size="lg" onChangeText={onChangePassword} />
+                    <Input placeholder={"Password"} value={password} size="lg" onChangeText={onChangePassword} secureTextEntry={true}/>
                     <Button onPress={onPressSignup} _text={{ fontSize: 20 }} size='lg' colorScheme={'yellow'}>Signup</Button>
                 </Box>
+                <Box mt={5}>
+          <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+            <Text>
+              Have an account? <Text bold fontSize={16} color={'orange.700'}>Login here</Text>
+            </Text>
+          </TouchableOpacity>
+        </Box>
             </VStack>
+            
         </NativeBaseProvider>
     )
 }
