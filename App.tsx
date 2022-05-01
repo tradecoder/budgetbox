@@ -1,20 +1,21 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { SignupScreen, LoginScreen } from './app/screens/screenLibrary';
+
+
+const Stack: any = createStackNavigator();
+
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>An organized budget management app for companies</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerStyle: { backgroundColor: 'orange' }, headerTitleStyle: { color: 'black' }, cardStyle: { backgroundColor: 'white' } }}>
+        <>
+          <Stack.Screen name="Login" component={LoginScreen} options={{ title: "Login" }} />
+          <Stack.Screen name="Signup" component={SignupScreen} options={{ title: "Sign up" }} />
+        </>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
