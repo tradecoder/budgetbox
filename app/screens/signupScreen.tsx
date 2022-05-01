@@ -73,7 +73,7 @@ export default function SignupScreen({navigation}:any) {
     // Show list of invaid input data if any
   function showInvalidDataList() {
     return (errorList.map((e, i) => {
-      return (<Text key={i} style={{ color: "red" }}>{i + 1}. {e}.{"\n"}</Text>)
+      return (<Text key={i} style={{ color: "red" }}><Text>{i + 1}. {e}</Text></Text>)
     }))
   }
 
@@ -85,7 +85,7 @@ export default function SignupScreen({navigation}:any) {
     }
     return (
         <NativeBaseProvider>
-            
+            <KeyboardAwareScrollView>
             <VStack p={5} space={3}>
                 <Box>
                     <Heading size="md" color={'blue.500'}>Sign up with real information</Heading>
@@ -110,7 +110,7 @@ export default function SignupScreen({navigation}:any) {
           </TouchableOpacity>
         </Box>
             </VStack>
-            
+            </KeyboardAwareScrollView>           
         </NativeBaseProvider>
     )
 }
