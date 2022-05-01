@@ -80,7 +80,6 @@ export default function SignupScreen({navigation}:any) {
 
     function onPressSignup(e: any) {
         inputDataCheckPoint();
-        console.log(errorList)
         return (alert("complete the data submit action"))
     }
     return (
@@ -95,12 +94,12 @@ export default function SignupScreen({navigation}:any) {
                     {showInvalidDataList()}
                 </Box>
                 <Box>
-                    <Input placeholder={"First Name"} value={firstName} size="lg" onChangeText={onChangeFirstName} />
-                    <Input placeholder={"Last Name"} value={lastName} size="lg" onChangeText={onChangeLastName} />
-                    <Input placeholder={"Email Address"} value={email} size="lg" onChangeText={onChangeEmail} />
-                    <Input placeholder={"Mobile Number"} value={mobileNumber} size="lg" onChangeText={onChangeMobileNumber} />
-                    <Input placeholder={"Password"} value={password} size="lg" onChangeText={onChangePassword} secureTextEntry={true}/>
-                    <Button onPress={onPressSignup} _text={{ fontSize: 20 }} size='lg' colorScheme={'yellow'}>Signup</Button>
+                    <Input my="1" variant="underlined" placeholder={"First Name"} value={firstName} size="lg" onChangeText={onChangeFirstName} />
+                    <Input my="1" variant="underlined" placeholder={"Last Name"} value={lastName} size="lg" onChangeText={onChangeLastName} />
+                    <Input my="1" variant="underlined" placeholder={"Email Address"} value={email} size="lg" onChangeText={onChangeEmail} />
+                    <Input my="1" variant="underlined" placeholder={"Mobile Number"} value={mobileNumber} size="lg" onChangeText={onChangeMobileNumber} />
+                    <Input my="1" variant="underlined" placeholder={"Password"} value={password} size="lg" onChangeText={onChangePassword} secureTextEntry={true}/>
+                    <Button my="1" onPress={onPressSignup} _text={{ fontSize: 20 }} size='lg' colorScheme={'yellow'}>Signup</Button>
                 </Box>
                 <Box mt={5}>
           <TouchableOpacity onPress={() => navigation.navigate("Login")}>
